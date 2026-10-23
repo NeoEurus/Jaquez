@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaquez - Generador de QRs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="bg-blur bg-blur-1"></div>
+    <div class="bg-blur bg-blur-2"></div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo-brand">
+                <div class="logo-icon">J</div>
+                <span class="logo-text">Jaquez</span>
+            </div>
+            <button id="theme-toggle" class="theme-btn" type="button" aria-label="Cambiar tema">
+                <svg id="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg id="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </header>
+
+        <main class="main-content">
+            <section class="form-section">
+                <h2>Configura tu Enlace</h2>
+                <p class="subtitle">Ingresa la URL y personaliza tu código QR en tiempo real.</p>
+
+                <form id="jaquez-form">
+                    <div class="input-group">
+                        <label for="url">URL de Destino</label>
+                        <input type="url" id="url" placeholder="https://ejemplo.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Forma del Logo (10 opciones)</label>
+                        <div class="shape-picker" id="shape-picker">
+                            <button type="button" class="shape-btn active" data-shape="circle" title="Círculo">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg>
+                            </button>
+                            <button type="button" class="shape-btn" data-shape="square" title="Cuadrado">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" fill="currentColor"/></svg>
+                            </button>
+                            <button type="button" class="shape-btn" data-shape="rounded" title="Redondeado">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5" fill="currentColor"/></svg>
+                            </button>
+                            <button type="button" class="shape-btn" data-shape="triangle" title="Triángulo">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><polygon points="12,3 21,20 3,20" fill="currentColor"/></svg>
+                            </button>
+                            <button type="button" class="shape-btn" data-shape="hexagon" title="Hexágono">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 21,7 21,17 12,22 3,17 3,7" fill="currentColor"/></svg>
+                            </button>
+                            <button type="button" class="shape-btn" data-shape="rhombus" title="Rombo">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 22,12 12,22 2,12" fill="currentColor"/></svg>
+                            </button>
+                            <button type="button" class="shape-btn" data-shape="star" title="Estrella">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 16,14 18,21 12,17 6,21 8,14 2,9 9,9" fill="currentColor"/></svg>
+                            </button>
+                            <button type="button" class="shape-btn" data-shape="shield" title="Escudo">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2L4 5v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V5l-8-3z" fill="currentColor"/></svg>
+                            </button>
+                            <button type="button" class="shape-btn" data-shape="heart" title="Corazón">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/></svg>
+                            </button>
+                            <button type="button" class="shape-btn" data-shape="octagon" title="Octágono">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86" fill="currentColor"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="color-grid">
+                        <div class="input-group">
+                            <label for="color-dark">Color del QR</label>
+                            <input type="color" id="color-dark" value="#6366f1">
+                        </div>
+                        <div class="input-group">
+                            <label for="color-light">Fondo del QR</label>
+                            <input type="color" id="color-light" value="#0f172a">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-with-action">
+                            <label>Logo / Imagen (Opcional)</label>
+                            <button type="button" id="remove-logo-btn" class="text-action-btn" style="display:none;">Quitar logo</button>
+                        </div>
+                        <div class="file-dropzone" id="dropzone">
+                            <input type="file" id="logo" accept="image/*">
+                            <div class="dropzone-content">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                                <span>Arrastra o haz clic para subir logo (opcional)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" id="download-btn" class="submit-btn">
+                        <span>Descargar Código QR</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                    </button>
+                </form>
+            </section>
+
+            <section class="preview-section">
+                <div class="preview-card">
+                    <div class="preview-header">
+                        <h3>Vista Previa QR</h3>
+                        <span class="live-dot"></span>
+                    </div>
+
+                    <div class="qr-wrapper" id="qr-wrapper-bg">
+                        <div id="qrcode"></div>
+                        <div class="logo-overlay-container shape-circle" data-logo id="logo-container" style="display: none;">
+                            <img class="logo" id="logo-preview" src="" alt="Logo preview">
+                        </div>
+                    </div>
+
+                    <div class="preview-info">
+                        <div class="info-row">
+                            <span class="info-label">URL:</span>
+                            <span class="info-value" id="info-url-text">https://ejemplo.com</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Forma Logo:</span>
+                            <span class="info-value" id="info-shape-text">Círculo</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <ul class="social-links">
+                <li>
+                    <a href="https://eurus.lat" target="_blank" rel="noopener" class="eurus-link" title="Eurus Lat">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        <span>eurus.lat</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com" target="_blank" rel="noopener">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        GitHub
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:tu-correo@ejemplo.com">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Correo
+                    </a>
+                </li>
+                <li>
+                    <a href="https://x.com" target="_blank" rel="noopener">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                        X
+                    </a>
+                </li>
+                <li>
+                    <a href="https://instagram.com" target="_blank" rel="noopener">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        Instagram
+                    </a>
+                </li>
+                <li>
+                    <a href="https://youtube.com" target="_blank" rel="noopener">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"></polygon></svg>
+                        YouTube
+                    </a>
+                </li>
+            </ul>
+            <div class="footer-credit">Hecho por Eurus Hanma</div>
+        </footer>
+    </div>
+
+    <script src="app/script.js"></script>
+</body>
+</html>
