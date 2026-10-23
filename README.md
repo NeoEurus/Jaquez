@@ -25,7 +25,7 @@
 
 ## 🌐 Demo
 
-Puedes probar la aplicación directamente desplegada en GitHub Pages:
+Puedes probar la aplicación directamente desplegada:
 
 👉 **[Click aquí](https://jaquez.rf.gd/?i=1)**
 
