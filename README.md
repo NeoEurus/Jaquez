@@ -27,7 +27,7 @@
 
 Puedes probar la aplicación directamente desplegada en GitHub Pages:
 
-👉 **[Click aquí](https://neoeurus.github.io/Jaquez/)**
+👉 **[Click aquí](https://jaquez.rf.gd/?i=1)**
 
 ---
 
